@@ -22,6 +22,7 @@
 }</result>
       <param name="EmployeeNumber" sqlType="STRING"/>
    </query>
+   
    <query id="AddEmployeeDetails" useConfig="Datasource">
       <sql>insert into Employees (EmployeeNumber, FirstName, LastName, Email, Salary) values(:EmployeeNumber,:FirstName,:LastName,:Email,:Salary)</sql>
       <param name="EmployeeNumber" sqlType="STRING"/>
@@ -38,8 +39,17 @@
       <param name="Salary" sqlType="STRING"/>
       <param name="EmployeeNumber" sqlType="STRING"/>
    </query>
+      <query id="DeleteEmployeeDetails" useConfig="Datasource">
+      <sql>delete from Employees where EmployeeNumber=:EmployeeNumber</sql>
+      <param name="EmployeeNumber" sqlType="STRING"/>
+   </query>
    <operation name="GetEmployeeOp">
       <call-query href="GetEmployeeDetails">
+         <with-param name="EmployeeNumber" query-param="EmployeeNumber"/>
+      </call-query>
+   </operation>
+   <operation name="DeleteEmployeeOp">
+      <call-query href="DeleteEmployeeDetails">
          <with-param name="EmployeeNumber" query-param="EmployeeNumber"/>
       </call-query>
    </operation>
@@ -81,6 +91,11 @@
          <with-param name="FirstName" query-param="FirstName"/>
          <with-param name="Email" query-param="Email"/>
          <with-param name="Salary" query-param="Salary"/>
+         <with-param name="EmployeeNumber" query-param="EmployeeNumber"/>
+      </call-query>
+   </resource>
+   <resource method="DELETE" path="Employee/{EmployeeNumber}">
+      <call-query href="DeleteEmployeeDetails">
          <with-param name="EmployeeNumber" query-param="EmployeeNumber"/>
       </call-query>
    </resource>
