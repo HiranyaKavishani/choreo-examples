@@ -30,25 +30,18 @@ paths:
                   value: "{\n\t\"Employees\": {\n\t\t\"Employee\": [{\n\t\t\t\"EmployeeNumber\": \"1\",\n\t\t\t\"FirstName\": \"John\",\n\t\t\t\"LastName\": \"Doe\",\n\t\t\t\"Email\": \"JohnDoe@gmail.com\",\n\t\t\t\"Salary\": \"10000\"\n\t\t}, {\n\t\t\t\"EmployeeNumber\": \"1\",\n\t\t\t\"FirstName\": \"John\",\n\t\t\t\"LastName\": \"Doe\",\n\t\t\t\"Email\": \"JohnDoe@gmail.com\",\n\t\t\t\"Salary\": \"20000\"\n\t\t}]\n\t}\n}"
     delete:
       parameters:
-        - name: employee-id
-          in: path
-          required: true
-          style: simple
-          explode: false
+        - in: path
+          name: EmployeeId
           schema:
-            type: string
-            format: string
+            type: integer
+          required: true
+          description: Numeric ID of the Employee
+          examples:
+            default:
+              value: 14001
       responses:
         '200':
           description: ok
-      security:
-        - default: []
-      x-auth-type: Application & Application User
-      x-throttling-tier: Unlimited
-      x-wso2-application-security:
-        security-types:
-          - oauth2
-        optional: false
   /services/RDBMSDataService/Employees:
     post:
       requestBody:
