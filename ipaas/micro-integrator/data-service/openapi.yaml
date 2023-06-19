@@ -42,7 +42,7 @@ paths:
       responses:
         '200':
           description: ok
-  /services/RDBMSDataService/Employees:
+  /services/RDBMSDataService/Employee:
     post:
       requestBody:
         required: true
